@@ -8,7 +8,7 @@ export class UserController {
       .status(200)
       .send({ ok: true, message: 'Api - User', data: user });
   }
-  public async create(req: Request, resp: Response) {
+  public async create(req: Request, res: Response) {
     const { body } = req.body;
 
     const newUser = await userService.create(body);

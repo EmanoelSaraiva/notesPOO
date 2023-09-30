@@ -8,9 +8,9 @@ export class NotesController {
       .status(200)
       .send({ ok: true, message: 'Api - Notes', data: notes });
   }
-  public async create(req: Request, resp: Response) {
+  public async create(req: Request, res: Response) {
     const { body } = req.body;
 
-    const newUser = await notesService.create(body);
+    const newNotes = await notesService.create(body);
   }
 }

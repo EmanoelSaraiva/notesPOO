@@ -8,7 +8,7 @@ export default class User {
   constructor(
     public _name: string,
     public _email: string,
-    private _password: string,
+    public _password: string,
   ) {
     this._id = uuid();
   }
