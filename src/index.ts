@@ -1,7 +1,8 @@
 import express, { Request, Response } from 'express';
 import userRouter from './routes/user.routes';
-import repository from './database/prisma.database';
 import userService from './services/user.service';
+import repository from './database/prisma.database';
+import notesService from './services/notes.service';
 
 const app = express();
 app.use(express.json());
@@ -11,8 +12,16 @@ app.listen(3333, () => {
   console.log('Api rodando na porta 3333');
 });
 
-app.get('/', (req: Request, res: Response) => {
-  return res.status(200).send({ ok: true, message: 'API Notes', data: [] });
+app.get('/', async (req: Request, res: Response) => {
+  const dataUser = await repository.user.findMany({
+    include: {
+      notes: true,
+    },
+  });
+
+  return res
+    .status(200)
+    .send({ ok: true, message: 'API Notes', data: dataUser });
 });
 
 app.post('/users', async (req: Request, res: Response) => {
@@ -28,5 +37,21 @@ app.post('/users', async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Erro ao criar usuário:', error);
     res.status(500).json({ error: 'Erro ao criar usuário' });
+  }
+});
+
+app.post('/notes', async (req: Request, res: Response) => {
+  const { contentNotes, title, userId } = req.body;
+
+  try {
+    const createdNotes = await notesService.create({
+      _contentNotes: contentNotes,
+      _title: title,
+      _idUser: userId,
+    });
+    res.json(createdNotes);
+  } catch (error) {
+    console.error('Erro ao criar uma nota:', error);
+    res.status(500).json({ error: 'Erro ao criar nota' });
   }
 });

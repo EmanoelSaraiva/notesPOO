@@ -6,7 +6,7 @@ export class UserController {
     const user = await userService.findAll();
     return res
       .status(200)
-      .send({ ok: true, message: 'Api - Notes', data: user });
+      .send({ ok: true, message: 'Api - User', data: user });
   }
   public async create(req: Request, resp: Response) {
     const { body } = req.body;
