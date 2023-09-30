@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(userRouter);
 
 app.listen(3333, () => {
-  console.log('Api rodando na porta 3333');
+  console.log('Api rodando na porta 333335');
 });
 
 app.get('/', (req: Request, res: Response) => {
