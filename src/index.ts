@@ -12,6 +12,8 @@ app.listen(3333, () => {
 });
 
 app.get('/', (req: Request, res: Response) => {
+  const data = repository.user.findMany();
+  console.log(data);
   return res.status(200).send({ ok: true, message: 'API Notes', data: [] });
 });
 
