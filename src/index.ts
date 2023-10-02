@@ -26,6 +26,15 @@ app.get('/', async (req: Request, res: Response) => {
 
 app.post('/users', async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
+  const verifEmail = await repository.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (verifEmail) {
+    return res.status(500).json({ error: 'Email ja cadastrado' });
+  }
 
   try {
     const createdUser = await userService.create({

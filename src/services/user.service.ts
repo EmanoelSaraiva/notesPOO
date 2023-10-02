@@ -8,6 +8,16 @@ class UserService {
     return data;
   }
   public async create(data: any) {
+    const veriEmail = await repository.user.findUnique({
+      where: {
+        email: data._email,
+      },
+    });
+
+    if (veriEmail) {
+      throw new Error('Email já esta sendo usado por outro usuário');
+    }
+
     const newUser = new User(data._name, data._email, data._password);
     const saltRounds = 8;
 
