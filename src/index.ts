@@ -58,6 +58,7 @@ app.post('/notes', async (req: Request, res: Response) => {
 
 app.delete('/notes/:id', async (req: Request, res: Response) => {
   const noteId = req.params.id;
+  const userId = req.params.userId;
 
   try {
     const idNote = await notesService.delete(noteId);
