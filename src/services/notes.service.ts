@@ -12,14 +12,17 @@ class NotesService {
     const newNote = new Notes(data._title, data._contentNotes, data._idUser);
 
     const createdNotes = await repository.notes.create({
-      data: {
-        title: data._title,
-        contentNotes: data._contentNotes,
-        userId: data._idUser,
-      },
+      data: newNote.toSave(),
     });
 
     return createdNotes;
+  }
+
+  public async delete(noteId: string) {
+    const deleteNote = await repository.notes.delete({
+      where: { id: noteId },
+    });
+    return deleteNote;
   }
 }
 export default new NotesService();

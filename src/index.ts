@@ -55,3 +55,19 @@ app.post('/notes', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Erro ao criar nota' });
   }
 });
+
+app.delete('/notes/:id', async (req: Request, res: Response) => {
+  const noteId = req.params.id;
+
+  try {
+    const idNote = await notesService.delete(noteId);
+    if (idNote) {
+      res.status(200).json({ message: 'Nota excluida com sucesso' });
+    } else {
+      res.status(404).json({ message: 'Nota não encontrada' });
+    }
+  } catch (error) {
+    console.error('Erro ao encontrar nota:', error);
+    res.status(500).json({ error: 'Erro ao deletar nota' });
+  }
+});

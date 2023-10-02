@@ -6,25 +6,14 @@ export default class Notes {
   constructor(
     public _title: string,
     public _contentNotes: string,
-    private _idUser: string,
+    public _idUser: string,
   ) {
     this._id = uuid();
   }
 
-  public getContentNotes() {
-    return this._contentNotes;
-  }
-
-  public getTitle() {
-    return this._title;
-  }
-
-  public getidUser() {
-    return this._idUser;
-  }
-
   public toJson() {
     return {
+      id: this._id,
       title: this._title,
       contentNotes: this._contentNotes,
       idUser: this._idUser,
@@ -35,8 +24,8 @@ export default class Notes {
     return {
       id: this._id,
       title: this._title,
-      contentNote: this._contentNotes,
-      idUser: this._idUser,
+      contentNotes: this._contentNotes,
+      userId: this._idUser,
     };
   }
 }
