@@ -1,9 +1,13 @@
 import { Router } from 'express';
 import { NotesController } from '../controllers/notes.controller';
 
-const routerNotes = Router();
-const controllerNotes = new NotesController();
+export const notesRoutes = () => {
+  const router = Router();
 
-routerNotes.get('/notes', controllerNotes.index);
+  router.get('/', new NotesController().index);
+  router.post('/', new NotesController().create);
+  router.delete('/:id', new NotesController().delete);
+  router.put('/:id', new NotesController().update);
 
-export default routerNotes;
+  return router;
+};

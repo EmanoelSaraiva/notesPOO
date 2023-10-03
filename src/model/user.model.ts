@@ -2,43 +2,48 @@ import { v4 as uuid } from 'uuid';
 import Notes from './notes.model';
 
 export default class User {
-  private _id: string;
-  public _notes!: Notes[];
+  private id: string;
+  public notes!: Notes[];
 
   constructor(
-    public _name: string,
-    public _email: string,
-    public _password: string,
+    public name: string,
+    public email: string,
+    public password: string,
   ) {
-    this._id = uuid();
+    this.id = uuid();
   }
 
   public getId() {
-    return this._id;
+    return this.id;
   }
 
   public getNotes() {
-    return this._notes;
+    return this.notes;
   }
 
   public getEmail() {
-    return this._email;
+    return this.email;
   }
 
   public getPassword() {
-    return this._password;
+    return this.password;
   }
 
   public getJson() {
-    return { id: this._id, name: this._name, email: this._email };
+    return {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      notes: this.notes,
+    };
   }
 
   public toSave() {
     return {
-      id: this._id,
-      name: this._name,
-      email: this._email,
-      password: this._password,
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      password: this.password,
     };
   }
 }

@@ -1,31 +1,31 @@
 import { v4 as uuid } from 'uuid';
 
 export default class Notes {
-  private _id: string;
+  private id: string;
 
   constructor(
-    public _title: string,
-    public _contentNotes: string,
-    public _idUser: string,
+    public title: string,
+    public contentNotes: string,
+    public userId: string,
   ) {
-    this._id = uuid();
+    this.id = uuid();
   }
 
   public toJson() {
     return {
-      id: this._id,
-      title: this._title,
-      contentNotes: this._contentNotes,
-      idUser: this._idUser,
+      id: this.id,
+      title: this.title,
+      contentNotes: this.contentNotes,
+      userId: this.userId,
     };
   }
 
   public toSave() {
     return {
-      id: this._id,
-      title: this._title,
-      contentNotes: this._contentNotes,
-      userId: this._idUser,
+      id: this.id,
+      title: this.title,
+      contentNotes: this.contentNotes,
+      userId: this.userId,
     };
   }
 }

@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -32,8 +31,8 @@ model notes {
   title        String
   userId       String
 
-  dtCrt DateTime  @default(now())
-  dtAtl DateTime?
+  dtCrt DateTime @default(now())
+  dtAtl DateTime @updatedAt
 
   user user @relation(fields: [userId], references: [id])
 }
